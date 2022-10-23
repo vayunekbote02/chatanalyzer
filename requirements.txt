@@ -1,0 +1,7 @@
+streamlit==1.13.0
+matplotlib==3.6.0
+matplotlib-inline==0.1.6
+seaborn==0.12.1
+wordcloud==1.8.2.2
+pandas==1.4.4
+advertools==0.13.2
