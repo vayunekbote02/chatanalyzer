@@ -62,22 +62,21 @@ if uploaded_file:
                        labels=y['Name'], autopct='%.2f%%')
                 st.pyplot(fig)
 
-        # WordCloud
-        st.title("Most frequently used words")
-        df_wc = helper.create_wc(selected_user, df)
-        fig, ax = plt.subplots()
-        plt.imshow(df_wc)
-        st.pyplot(fig)
-
         # Emoji analysis
         col1, col2 = st.columns(2)
         emoji_df = helper.emoji_helper(selected_user, df)
         with col1:
             st.header("Total number of emojis sent")
-            st.title(emoji_df.sum()[1])
+            if not emoji_df.empty:
+                st.title(emoji_df.sum()[1])
+            else:
+                st.title("No Emojis Used")
         with col2:
             st.header("Most frequently used emojis")
-            st.dataframe(emoji_df)
+            if not emoji_df.empty:
+                st.dataframe(emoji_df)
+            else:
+                st.title("No Emojis Used")
 
         # Timeline
         fig, ax = plt.subplots()
@@ -111,4 +110,11 @@ if uploaded_file:
 
         fig, ax = plt.subplots()
         ax = sns.heatmap(pivot_table)
+        st.pyplot(fig)
+
+        # WordCloud
+        st.title("Most frequently used words (Works for English letters only")
+        df_wc = helper.create_wc(selected_user, df)
+        fig, ax = plt.subplots()
+        plt.imshow(df_wc)
         st.pyplot(fig)

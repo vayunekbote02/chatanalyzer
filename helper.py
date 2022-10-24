@@ -54,10 +54,13 @@ def emoji_helper(user, df):
 
     emojis = []
     for message in df['message']:
-        emoji_summary = adv.extract_emoji(message.split())
-        for emoji in emoji_summary['emoji']:
-            if emoji:
-                emojis.extend(emoji)
+        try:
+            emoji_summary = adv.extract_emoji(message.split())
+            for emoji in emoji_summary['emoji']:
+                if emoji:
+                    emojis.extend(emoji)
+        except ZeroDivisionError:
+            pass
 
     emoji_df = pd.DataFrame(Counter(emojis).most_common(10))
 
